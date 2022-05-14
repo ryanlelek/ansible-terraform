@@ -1,0 +1,13 @@
+---
+
+- name: Common
+  import_playbook: ./common.yml
+
+- name: NGINX
+  import_playbook: ./nginx.yml
+
+- name: Web
+  import_playbook: ./web.yml
+
+- name: LoadBalancer
+  import_playbook: ./lb.yml

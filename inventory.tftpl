@@ -1,0 +1,12 @@
+
+[loadbalancer]
+lb  ansible_host=${lb_ipv4}  ansible_user=root  # ${lb_id}
+
+[web]
+%{ for index, id in web_ids ~}
+web${index}  ansible_host=${web_ipv4[index]}  ansible_user=root  # ${web_ids[index]}
+%{ endfor ~}
+
+[nginx:children]
+loadbalancer
+web

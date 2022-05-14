@@ -1,0 +1,8 @@
+# If needed, you can upload files with Terraform
+# Remember, do only what's necessary to get to "Ansible land"
+#
+# Sometimes you may need to upload certain files
+# Especially in enterprise datacenters with complex setup
+#
+# We don't need anything for our small project
+# This is an example

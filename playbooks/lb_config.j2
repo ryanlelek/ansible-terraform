@@ -1,0 +1,28 @@
+
+server {
+  listen 80;
+
+  # Close connection (for browser demo)
+  keepalive_requests 0;
+  keepalive_timeout  0;
+
+  # Disable Cache (for browser demo)
+  # https://stackoverflow.com/questions/45857450/how-to-disable-cache-nginx#45861136
+  add_header Last-Modified $date_gmt;
+  add_header Cache-Control 'private no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+  if_modified_since off;
+  expires off;
+  etag off;
+
+  # Pass to Backends
+  location / {
+    include /etc/nginx/proxy_params;
+    proxy_pass  http://backends;
+  }
+}
+
+upstream backends {
+{% for host in groups['web'] %}
+  server {{ hostvars[host]['ansible_default_ipv4']['address'] }}:80 weight=1;
+{% endfor %}
+}

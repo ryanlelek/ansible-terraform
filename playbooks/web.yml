@@ -1,0 +1,11 @@
+---
+- hosts: web
+  become: true
+  tasks:
+
+    - name: Creating a file with content
+      copy:
+        dest: "/var/www/html/index.nginx-debian.html"
+        content: |
+          <h1>{{ inventory_hostname }}</h1>
+          This is the webpage.
